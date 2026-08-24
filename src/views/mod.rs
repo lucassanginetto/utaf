@@ -1,0 +1,21 @@
+mod artist;
+mod error;
+mod footer;
+mod head;
+mod home;
+mod layout;
+mod lyrics;
+mod navbar;
+mod search;
+mod song_writer;
+
+pub use artist::*;
+pub use error::*;
+pub use footer::*;
+pub use head::*;
+pub use home::*;
+pub use layout::*;
+pub use lyrics::*;
+pub use navbar::*;
+pub use search::*;
+pub use song_writer::*;

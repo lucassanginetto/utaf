@@ -1,0 +1,14 @@
+nav {
+  background-color: #ff9911;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#navbar_search_input {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+}

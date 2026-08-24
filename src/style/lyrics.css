@@ -1,0 +1,18 @@
+#song_metadata_div {
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+#lyrics_div {
+  text-align: center;
+  margin: 1rem;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  flex-basis: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+}

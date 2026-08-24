@@ -1,0 +1,67 @@
+#search_main {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 1rem;
+}
+
+#search_main h1 {
+  text-align: center;
+}
+
+#search_results_ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search_results_li {
+  display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  gap: 1rem;
+  padding: 1rem;
+  box-shadow: 0 1px 1px;
+}
+
+#search_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#search_form_input_grid_div {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+.search_input {
+  width: 100%;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+#search_button {
+  background-color: #333333;
+  color: white;
+  width: 50%;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+#search_songs_ul {
+  text-align: left;
+}

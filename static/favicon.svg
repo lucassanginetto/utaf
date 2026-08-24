@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="124.99999mm"
+   height="125mm"
+   viewBox="0 0 124.99999 125"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="124.99999"
+       height="125"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-39.268159,-144.35195)">
+    <rect
+       style="fill:#ff9911;fill-opacity:1;stroke:none;stroke-width:10;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2"
+       width="125"
+       height="125"
+       x="39.268158"
+       y="144.35194"
+       ry="5" />
+    <g
+       id="g3"
+       transform="translate(-0.27371233,119.79611)">
+      <path
+         id="path1"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:10;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 53.745557,74.114856 a 50,50 0 0 0 19.617407,53.898514 50,50 0 0 0 57.357736,0 50,50 0 0 0 19.61741,-53.898514 l -19.3182,5.176428 a 30,30 0 0 1 1.02216,7.764384 30,30 0 0 1 -30.00024,30.000232 30,30 0 0 1 -29.999716,-30.000232 30,30 0 0 1 1.02216,-7.764384 z" />
+      <rect
+         style="fill:#000000;stroke-width:1;stroke-linejoin:round"
+         id="rect1-0"
+         width="33"
+         height="50"
+         x="119.04189"
+         y="37.055862"
+         ry="5" />
+      <rect
+         style="fill:#000000;stroke-width:1;stroke-linejoin:round"
+         id="rect1"
+         width="33"
+         height="50"
+         x="52.041893"
+         y="37.055862"
+         ry="5" />
+    </g>
+  </g>
+</svg>
