@@ -1,0 +1,6 @@
+/target
+/static/style.css
+Dockerfile
+.dockerignore
+.git
+.gitignore
