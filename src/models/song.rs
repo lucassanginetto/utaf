@@ -1,3 +1,4 @@
+use chrono::NaiveDate;
 use url::Url;
 
 use crate::models::{ArtistPreview, SongWriterPreview};
@@ -14,6 +15,7 @@ pub struct Song {
     pub title: String,
     pub image: Url,
     pub artist: ArtistPreview,
+    pub release_date: NaiveDate,
     pub lyricists: Vec<SongWriterPreview>,
     pub composers: Vec<SongWriterPreview>,
     pub arrangers: Vec<SongWriterPreview>,

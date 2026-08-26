@@ -13,6 +13,7 @@ pub fn lyrics_page(song: &Song) -> templ_ret!['_] {
                     <div>
                         <h1>{ song.title }</h1>
                         <p>by <a href={ format!("/artist/lyric/{}", song.artist.id) }>{ song.artist.name }</a></p>
+                        <p>released on { song.release_date }</p>
 
                         #if song.tags.len() > 0 {
                             <h2>Tags</h2>

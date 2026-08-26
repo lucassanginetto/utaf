@@ -1,5 +1,6 @@
 use std::{convert::identity, sync::LazyLock};
 
+use chrono::NaiveDate;
 use scraper::{Element, ElementRef, Html, Node, Selector};
 use url::{ParseError, Url};
 
@@ -16,6 +17,9 @@ static IMAGE_IMG_SELECTOR: LazyLock<Selector> =
 
 static ARTIST_A_SELECTOR: LazyLock<Selector> =
     LazyLock::new(|| Selector::parse("dt.newLyricWork__name a").unwrap());
+
+static RELEASE_DATE_DD_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("dd.newLyricWork__date").unwrap());
 
 static SONG_WRITER_A_SELECTOR: LazyLock<Selector> = LazyLock::new(|| {
     Selector::parse("dt.newLyricWork__title + dd.newLyricWork__body > a").unwrap()
@@ -132,6 +136,28 @@ pub fn scrape_song(html: &Html) -> Result<Song, ScrapeError<'_>> {
 
         ArtistPreview { id, name }
     };
+
+    let release_date = {
+        let selector = &RELEASE_DATE_DD_SELECTOR;
+        html.select(selector)
+            .next()
+            .ok_or(ScrapeError::MissingElement { selector })
+            .and_then(|dd| {
+                dd.text()
+                    .next()
+                    .ok_or(ScrapeError::MissingText { selector })
+                    .and_then(|text| {
+                        text.trim()
+                            .split_whitespace()
+                            .next()
+                            .ok_or(ScrapeError::MissingText { selector })
+                            .and_then(|date_str| {
+                                NaiveDate::parse_from_str(date_str, "%Y.%m.%d")
+                                    .map_err(|_| ScrapeError::InvalidText { selector, text })
+                            })
+                    })
+            })
+    }?;
 
     let lyricists = {
         let selector = &SONG_WRITER_A_SELECTOR;
@@ -323,6 +349,7 @@ pub fn scrape_song(html: &Html) -> Result<Song, ScrapeError<'_>> {
         title,
         image,
         artist,
+        release_date,
         lyricists,
         composers,
         arrangers,

@@ -2621,6 +2621,7 @@ dependencies = [
  "axum",
  "axum-embed",
  "axum-extra",
+ "chrono",
  "lightningcss",
  "reqwest",
  "rust-embed",
