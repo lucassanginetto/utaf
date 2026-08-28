@@ -14,7 +14,7 @@ pub fn song_writer_page(song_writer: &SongWriter) -> templ_ret!['_] {
                     #for song in song_writer.songs.iter() {
                         <li>
                             <a href={ format!("/lyric/{}/", song.id) }>
-                                { song.title }
+                                { song.title } by { song.artist.name }
                             </a>
                         </li>
                     }
