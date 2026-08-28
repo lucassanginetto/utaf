@@ -10,11 +10,23 @@ use crate::{
 static SONG_WRITER_NAME_H1_SELECTOR: LazyLock<Selector> =
     LazyLock::new(|| Selector::parse("h1.contentBox__title").unwrap());
 
-static TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
-    LazyLock::new(|| Selector::parse("p.searchResult__title > a").unwrap());
+static AS_LYRICIST_TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#lyricistTab p.searchResult__title > a").unwrap());
 
-static TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
-    LazyLock::new(|| Selector::parse("td.searchResult__artist > p > a").unwrap());
+static AS_LYRICIST_TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#lyricistTab td.searchResult__artist > p > a").unwrap());
+
+static AS_COMPOSER_TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#composerTab p.searchResult__title > a").unwrap());
+
+static AS_COMPOSER_TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#composerTab td.searchResult__artist > p > a").unwrap());
+
+static AS_ARRANGER_TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#arrangerTab p.searchResult__title > a").unwrap());
+
+static AS_ARRANGER_TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("#arrangerTab td.searchResult__artist > p > a").unwrap());
 
 pub fn scrape_song_writer(html: &Html) -> Result<SongWriter, ScrapeError<'_>> {
     let id = scrape_id_from_og_url_meta(html, 1)?;
@@ -36,7 +48,33 @@ pub fn scrape_song_writer(html: &Html) -> Result<SongWriter, ScrapeError<'_>> {
                     .map(|name_str| name_str.to_string())
             })
     }?;
-    let songs = scrape_songs_table(html, &TABLE_SONG_A_SELECTOR, &TABLE_ARTIST_A_SELECTOR)?;
+    let songs_as_lyricist = {
+        scrape_songs_table(
+            html,
+            &AS_LYRICIST_TABLE_SONG_A_SELECTOR,
+            &AS_LYRICIST_TABLE_ARTIST_A_SELECTOR,
+        )
+    }?;
+    let songs_as_composer = {
+        scrape_songs_table(
+            html,
+            &AS_COMPOSER_TABLE_SONG_A_SELECTOR,
+            &AS_COMPOSER_TABLE_ARTIST_A_SELECTOR,
+        )
+    }?;
+    let songs_as_arranger = {
+        scrape_songs_table(
+            html,
+            &AS_ARRANGER_TABLE_SONG_A_SELECTOR,
+            &AS_ARRANGER_TABLE_ARTIST_A_SELECTOR,
+        )
+    }?;
 
-    Ok(SongWriter { id, name, songs })
+    Ok(SongWriter {
+        id,
+        name,
+        songs_as_lyricist,
+        songs_as_composer,
+        songs_as_arranger,
+    })
 }
