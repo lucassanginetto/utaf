@@ -109,6 +109,12 @@ static ARTIST_NAME_P_SELECTOR: LazyLock<Selector> = LazyLock::new(|| {
 });
 */
 
+static TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("p.searchResult__title > a").unwrap());
+
+static TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("td.searchResult__artist > p > a").unwrap());
+
 pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'_>> {
     let params = scrape_search_params(html)?;
     /*
@@ -146,7 +152,7 @@ pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'
             .collect::<Result<Vec<_>, ScrapeError>>()
     }?;
     */
-    let songs = scrape_songs_table(html)?;
+    let songs = scrape_songs_table(html, &TABLE_SONG_A_SELECTOR, &TABLE_ARTIST_A_SELECTOR)?;
 
     Ok(SearchResults { params, songs })
 }

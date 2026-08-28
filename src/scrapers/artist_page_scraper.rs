@@ -10,6 +10,13 @@ use crate::{
 static ARTIST_NAME_H2_SELECTOR: LazyLock<Selector> =
     LazyLock::new(|| Selector::parse("div.contentBox__title h2").unwrap());
 
+static TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("table.searchResult h3 a").unwrap());
+
+static TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> = LazyLock::new(|| {
+    Selector::parse("table.searchResult td.searchResult__artist > p > a").unwrap()
+});
+
 pub fn scrape_artist(html: &Html) -> Result<Artist, ScrapeError<'_>> {
     let id = scrape_id_from_og_url_meta(html, 2)?;
     let name = {
@@ -24,7 +31,7 @@ pub fn scrape_artist(html: &Html) -> Result<Artist, ScrapeError<'_>> {
                     .map(|text| text.strip_suffix("の歌詞一覧").unwrap_or(text).to_string())
             })
     }?;
-    let songs = scrape_songs_table(html)?;
+    let songs = scrape_songs_table(html, &TABLE_SONG_A_SELECTOR, &TABLE_ARTIST_A_SELECTOR)?;
     Ok(Artist { id, name, songs })
 }
 

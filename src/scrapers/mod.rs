@@ -83,15 +83,13 @@ fn scrape_id_from_og_url_meta(
         })
 }
 
-static TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
-    LazyLock::new(|| Selector::parse("p.searchResult__title > a, h3 > a").unwrap());
-
-static TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
-    LazyLock::new(|| Selector::parse("td.searchResult__artist > p > a").unwrap());
-
-fn scrape_songs_table(html: &Html) -> Result<Vec<SongPreview>, ScrapeError<'_>> {
+fn scrape_songs_table<'a>(
+    html: &'a Html,
+    table_song_a_selector: &'static Selector,
+    table_artist_a_selector: &'static Selector,
+) -> Result<Vec<SongPreview>, ScrapeError<'a>> {
     {
-        let selector = &TABLE_ARTIST_A_SELECTOR;
+        let selector = table_artist_a_selector;
         html.select(selector).map(|a| {
             let id = {
                 let attr = "href";
@@ -118,7 +116,7 @@ fn scrape_songs_table(html: &Html) -> Result<Vec<SongPreview>, ScrapeError<'_>> 
         })
     }
     .zip({
-        let selector = &TABLE_SONG_A_SELECTOR;
+        let selector = table_song_a_selector;
         html.select(selector).map(|a| {
             let id = {
                 let attr = "href";
