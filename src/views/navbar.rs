@@ -2,7 +2,7 @@ use templr::{templ, templ_ret};
 
 pub fn navbar(hide_search: bool) -> templ_ret![] {
     templ! {
-        <nav>
+        <nav id="navbar">
             <a href="/"><img src="/static/logo.png" alt="UTAF" width="100px" height="25px"/></a>
             #if !hide_search {
                 <form method="GET" action="/search">
