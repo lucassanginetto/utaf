@@ -81,7 +81,7 @@ pub struct SearchParams {
     pub body: String,
     pub tag: String,
     pub sort: SortBy,
-    pub page: u32,
+    pub page: u8,
 }
 
 #[derive(Debug, Deserialize)]
@@ -104,4 +104,5 @@ pub struct RawSearchParams {
 pub struct SearchResults {
     pub params: SearchParams,
     pub songs: Vec<SongPreview>,
+    pub total_pages: u8,
 }

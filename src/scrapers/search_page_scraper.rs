@@ -115,6 +115,9 @@ static TABLE_SONG_A_SELECTOR: LazyLock<Selector> =
 static TABLE_ARTIST_A_SELECTOR: LazyLock<Selector> =
     LazyLock::new(|| Selector::parse("td.searchResult__artist > p > a").unwrap());
 
+static LAST_PAGE_A_SELECTOR: LazyLock<Selector> =
+    LazyLock::new(|| Selector::parse("li.pager__item--last a").unwrap());
+
 pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'_>> {
     let params = scrape_search_params(html)?;
     /*
@@ -153,8 +156,34 @@ pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'
     }?;
     */
     let songs = scrape_songs_table(html, &TABLE_SONG_A_SELECTOR, &TABLE_ARTIST_A_SELECTOR)?;
+    let total_pages = {
+        let selector = &LAST_PAGE_A_SELECTOR;
+        html.select(selector).next().map_or(Ok(1), |a| {
+            let attr = "href";
+            a.attr(attr)
+                .ok_or(ScrapeError::MissingAttribute { selector, attr })
+                .and_then(|value| {
+                    value
+                        .split('/')
+                        .filter_map(|param_str| match param_str.split_once('=') {
+                            Some((key, value)) if key == "page" => value.parse().ok(),
+                            _ => None,
+                        })
+                        .next()
+                        .ok_or(ScrapeError::InvalidAttribute {
+                            selector,
+                            attr,
+                            value,
+                        })
+                })
+        })
+    }?;
 
-    Ok(SearchResults { params, songs })
+    Ok(SearchResults {
+        params,
+        songs,
+        total_pages,
+    })
 }
 
 /*
