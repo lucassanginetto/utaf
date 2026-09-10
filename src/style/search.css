@@ -65,3 +65,26 @@
 #search_songs_ul {
   text-align: left;
 }
+
+#search_pagination_nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.search_page_button {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  min-width: 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.search_page_button.current {
+  background-color: #333333;
+  color: white;
+}

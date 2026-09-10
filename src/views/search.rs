@@ -4,6 +4,40 @@ use crate::models::SearchResults;
 
 use super::layout;
 
+fn search_pagination_nav(results: &SearchResults) -> templ_ret!['_] {
+    templ! {
+        <nav id="search_pagination_nav">
+            #for page in (1..=results.total_pages).filter(|&x| {
+                x == 1
+                || x == results.params.page.saturating_sub(2)
+                || x == results.params.page-1
+                || x == results.params.page
+                || x == results.params.page+1
+                || x == results.params.page+2
+                || x == results.total_pages
+            }) {
+                #if page == results.params.page {
+                    <span class="search_page_button current">{ page }</span>
+                } else {
+                    <a class="search_page_button" href={
+                        format!(
+                            "/search?artist_name={}&title={}&beginning={}&body={}&lyricist={}&composer={}&sub_title={}&tag={}&page={page}",
+                            &results.params.artist_name,
+                            &results.params.title,
+                            &results.params.beginning,
+                            &results.params.body,
+                            &results.params.lyricist,
+                            &results.params.composer,
+                            &results.params.sub_title,
+                            &results.params.tag
+                        )
+                    }>{ page }</a>
+                }
+            }
+        </nav>
+    }
+}
+
 pub fn search_page(results: &SearchResults) -> templ_ret!['_] {
     templ! {
         #layout("Search - UTAF", true) {
@@ -23,6 +57,7 @@ pub fn search_page(results: &SearchResults) -> templ_ret!['_] {
                     <button id="search_button" type="submit">Search</button>
                 </form>
                 <h2>Songs</h2>
+                #if results.total_pages > 1 { #search_pagination_nav(results); }
                 #if results.songs.len() > 0 {
                     <ul id="search_results_ul">
                         #for song in results.songs.iter() {
@@ -37,6 +72,7 @@ pub fn search_page(results: &SearchResults) -> templ_ret!['_] {
                 } else {
                     <p>No songs found</p>
                 }
+                #if results.total_pages > 1 { #search_pagination_nav(results); }
             </main>
         }
     }
