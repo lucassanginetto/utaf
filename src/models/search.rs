@@ -10,16 +10,12 @@ pub enum Order {
     Descending,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub enum SortBy {
+    #[default]
     Popularity,
     ReleaseDate(Order),
     TitleKana(Order),
-}
-impl Default for SortBy {
-    fn default() -> Self {
-        Self::Popularity
-    }
 }
 impl Display for SortBy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
