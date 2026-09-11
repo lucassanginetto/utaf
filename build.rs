@@ -31,6 +31,6 @@ fn main() {
 
     File::create("./static/style.css")
         .unwrap()
-        .write(to_css.code.as_bytes())
+        .write_all(to_css.code.as_bytes())
         .unwrap();
 }
