@@ -72,7 +72,7 @@ pub async fn search(Query(params): Query<RawSearchParams>) -> TemplrResponseResu
         if let Some(title) = params.title {
             url.query_pairs_mut().append_pair("title", &title);
         }
-        if let Some(name) = params.artist_name.as_deref() {
+        if let Some(name) = params.artist_name {
             url.query_pairs_mut().append_pair("artist_name", &name);
         }
         if let Some(sub_title) = params.sub_title {
