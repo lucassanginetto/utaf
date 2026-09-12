@@ -12,18 +12,18 @@ use crate::{
     views,
 };
 
-/* Type aliases */
+// # Type aliases
 
 type TemplrErrorResponse = (StatusCode, TemplrResponse);
 type TemplrResponseResult = Result<TemplrResponse, TemplrErrorResponse>;
 
-/* Handlers */
+// # Handlers
 
 pub async fn robots_txt() -> String {
     "User-agent: *\nDisallow: /\n".to_string()
 }
 
-/** Page handlers **/
+// ## Page handlers
 
 pub async fn home() -> TemplrResponse {
     views::home_page().response(&())
@@ -116,7 +116,7 @@ pub async fn not_found(Path(_): Path<String>) -> TemplrErrorResponse {
     )
 }
 
-/** Subhandlers **/
+// ## Subhandlers
 
 async fn scrape_data<T, S>(url: String, scraper_fn: S) -> Result<T, TemplrErrorResponse>
 where
