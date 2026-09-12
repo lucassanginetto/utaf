@@ -166,7 +166,7 @@ pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'
                     value
                         .split('/')
                         .filter_map(|param_str| match param_str.split_once('=') {
-                            Some((key, value)) if key == "page" => value.parse().ok(),
+                            Some(("page", value)) => value.parse().ok(),
                             _ => None,
                         })
                         .next()
