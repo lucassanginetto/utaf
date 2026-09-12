@@ -22,14 +22,14 @@ fn search_pagination_nav(results: &SearchResults) -> templ_ret!['_] {
                     <a class="search_page_button" href={
                         format!(
                             "/search?artist_name={}&title={}&beginning={}&body={}&lyricist={}&composer={}&sub_title={}&tag={}&page={page}",
-                            &results.params.artist_name,
-                            &results.params.title,
-                            &results.params.beginning,
-                            &results.params.body,
-                            &results.params.lyricist,
-                            &results.params.composer,
-                            &results.params.sub_title,
-                            &results.params.tag
+                            results.params.artist_name,
+                            results.params.title,
+                            results.params.beginning,
+                            results.params.body,
+                            results.params.lyricist,
+                            results.params.composer,
+                            results.params.sub_title,
+                            results.params.tag
                         )
                     }>{ page }</a>
                 }
