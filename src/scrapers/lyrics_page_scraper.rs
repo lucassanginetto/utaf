@@ -119,7 +119,7 @@ pub fn scrape_song(html: &Html) -> Result<Song, ScrapeError<'_>> {
                 .and_then(|value| {
                     value
                         .split('/')
-                        .last()
+                        .next_back()
                         .ok_or(ScrapeError::InvalidAttribute {
                             selector,
                             attr,
@@ -147,8 +147,7 @@ pub fn scrape_song(html: &Html) -> Result<Song, ScrapeError<'_>> {
                     .next()
                     .ok_or(ScrapeError::MissingText { selector })
                     .and_then(|text| {
-                        text.trim()
-                            .split_whitespace()
+                        text.split_whitespace()
                             .next()
                             .ok_or(ScrapeError::MissingText { selector })
                             .and_then(|date_str| {
