@@ -58,7 +58,7 @@ pub fn search_page(results: &SearchResults) -> templ_ret!['_] {
                 </form>
                 <h2>Songs</h2>
                 #if results.total_pages > 1 { #search_pagination_nav(results); }
-                #if results.songs.len() > 0 {
+                #if !results.songs.is_empty() {
                     <ul id="search_results_ul">
                         #for song in results.songs.iter() {
                             <li class="search_results_li">
