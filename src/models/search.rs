@@ -4,13 +4,13 @@ use serde::Deserialize;
 
 use crate::models::SongPreview;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq, Eq)]
 pub enum Order {
     Ascending,
     Descending,
 }
 
-#[derive(Debug, Default, Deserialize)]
+#[derive(Debug, Default, Deserialize, PartialEq, Eq)]
 pub enum SortBy {
     #[default]
     Popularity,
