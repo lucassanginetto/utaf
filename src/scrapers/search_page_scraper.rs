@@ -156,7 +156,9 @@ pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'
     }?;
     */
     let songs = scrape_songs_table(html, &TABLE_SONG_A_SELECTOR, &TABLE_ARTIST_A_SELECTOR)?;
-    let total_pages = {
+    let total_pages = if songs.is_empty() {
+        1
+    } else {
         let selector = &LAST_PAGE_A_SELECTOR;
         html.select(selector).next().map_or(Ok(1), |a| {
             let attr = "href";
@@ -176,8 +178,8 @@ pub fn scrape_search_results(html: &Html) -> Result<SearchResults, ScrapeError<'
                             value,
                         })
                 })
-        })
-    }?;
+        })?
+    };
 
     Ok(SearchResults {
         params,
