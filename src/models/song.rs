@@ -3,7 +3,7 @@ use url::Url;
 
 use crate::models::{ArtistPreview, SongWriterPreview};
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct SongPreview {
     pub id: String,
     pub title: String,
