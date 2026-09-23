@@ -47,6 +47,7 @@ pub fn lyrics_page(song: &Song) -> templ_ret!['_] {
                         }
                     </div>
                 </div>
+                <button id="furigana_button" type="button">Hide furigana</button>
                 <div id="lyrics_div">
                     { Trust(song.lyrics.clone()) }
                 </div>

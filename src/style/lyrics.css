@@ -16,3 +16,20 @@
   flex-shrink: 0;
   flex-grow: 1;
 }
+
+#lyrics_div.no_furigana rt,
+#lyrics_div.no_furigana rp {
+  display: none;
+}
+
+#furigana_button {
+  background-color: #333333;
+  color: white;
+  margin: 1rem auto 0;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  display: block;
+}
